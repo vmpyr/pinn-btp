@@ -16,8 +16,8 @@ parser.add_argument('--fp-resolution', type=int, default=400)
 parser.add_argument('--bc-resolution', type=int, default=200)
 
 def main(args, save_path):
-    lam_load = args.lam_load
-    mu = args.mu
+    lam_load = dde.Variable(args.lam_load)
+    mu = dde.Variable(args.mu)
 
     force_data = pd.read_csv('cook-data/force-data/force.csv')
     time_list = force_data['Time']
@@ -234,7 +234,7 @@ def main(args, save_path):
     # weights[6] = 100
 
     model.compile("adam", lr=0.001, external_trainable_variables=[lam_load], loss_weights = None)
-    variable = dde.callbacks.VariableValue([lam_load], period=100, filename="variable_history",precision=9)
+    variable = dde.callbacks.VariableValue([lam_load], period=100, filename=f'./{save_path}/variable_history',precision=9)
 
     num_epochs = args.epochs
     model.train(epochs=num_epochs, display_every=1000, callbacks=[variable])
