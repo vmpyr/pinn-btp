@@ -247,7 +247,7 @@ def main(args, save_path):
     np.save(f'./{save_path}/steps.npy', model.losshistory.steps)
     np.save(f'./{save_path}/loss_train.npy', model.losshistory.loss_train)
     np.save(f'./{save_path}/loss_test.npy', model.losshistory.loss_test)
-    np.save(f'./{save_path}/loss_weights.npy', model.losshistory.loss_weights)
+    # np.save(f'./{save_path}/loss_weights.npy', model.losshistory.loss_weights)
 
 if __name__ == '__main__':
     args = parser.parse_args()
